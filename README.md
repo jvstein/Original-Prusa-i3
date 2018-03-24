@@ -15,4 +15,9 @@ This repository contains SCAD files and STLs of the printed parts.
  * MK52 heatbed : https://github.com/prusa3d/Heatbed_MK52_magnetic
  * Laser filament sensor : https://github.com/prusa3d/PRUSA_Laser_filament_sensor
  * MK3 Power panic : https://github.com/prusa3d/MK3_Power_Panic
- 
+
+
+# CHANGES IN THIS BRANCH
+[Compare to the MK3 branch](https://github.com/prusa3d/Original-Prusa-i3/compare/MK3...jvstein:reprap-samuel-x-ends).
+ * Parameterize the x-ends to support different distances between the z-axis rods.
+ * Adjust the x-end models for the RepRap Samuel.
