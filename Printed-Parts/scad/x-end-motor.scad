@@ -106,7 +106,7 @@ module x_end_motor()
             translate([-30,-30,58]) cube([30,30,10]);
             
             // version
-            translate([-23.2,-20,2]) rotate([90,0,270]) linear_extrude(height = 0.6) 
+            translate([-23.2,-32,2]) rotate([90,0,270]) linear_extrude(height = 0.6) 
             { text("R2",font = "helvetica:style=Bold", size=4, center=true); }   
         }
 
@@ -145,9 +145,9 @@ difference()
         translate([-8,-17,13.0]) rotate([0,0,44.7]) cube([10,1.5,1]);
     }
     
-    translate([-47,-40,60]) rotate([0,45,0]) cube([20,80,20]);    
-    translate([-20,-30.5,69]) rotate([0,45,0]) cube([20,20,20]);    
-    translate([-25,-37,49]) rotate([45,0,0]) cube([30,20,20]);   
+    translate([-47,-50,60]) rotate([0,45,0]) cube([20,100,20]);    
+    translate([-20,-50.5,69]) rotate([0,45,0]) cube([20,40,20]);    
+    translate([-25,-50,49]) rotate([45,0,0]) cube([30,20,20]);   
     translate([-25,23.5,49]) rotate([45,0,0]) cube([30,20,20]);   
 }   
     

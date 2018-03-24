@@ -12,10 +12,10 @@ use <polyholes.scad>
 rod_distance = 45;
 
 // center distance between the lead screw and smooth rod.
-z_rod_distance = 17;
+z_rod_distance = 30;
 
 // radial distance from lead screw center to nut hold center.
-lead_nut_holes = 9.5;
+lead_nut_holes = 8;
 
 
 // Adjustments for parameterized z rod separation. Original model was 17mm.

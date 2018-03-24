@@ -119,7 +119,7 @@ module x_end_idler()
         translate(v=[-8,-15.5,30.25]) rotate(a=[0,-90,0]) cylinder(h = 20, r=1.55, $fn=30);
         translate([-25,7.5,-1]) rotate([0,0,45])  cube([10,10,100]);
         //version
-        translate([-23.7,-25,2]) rotate([90,0,90]) linear_extrude(height = 0.6) 
+        translate([-23.7,0,2]) rotate([90,0,90]) linear_extrude(height = 0.6) 
         { text("R2",font = "helvetica:style=Bold", size=4, center=true); }   
     }
     
@@ -156,8 +156,8 @@ difference()
         x_end_idler();
         translate([-8,15,13.0]) rotate([0,0,-45.4]) cube([10,1.5,1]);
     }
-    translate([-47,-40,60]) rotate([0,45,0]) cube([20,80,20]);    
-    translate([-20,10.5,69]) rotate([0,45,0]) cube([20,20,20]);    
-    translate([-25,37,49]) rotate([45,0,0]) cube([30,20,20]);    
+    translate([-47,-50,60]) rotate([0,45,0]) cube([20,100,20]);    
+    translate([-20,10.5,69]) rotate([0,45,0]) cube([20,40,20]);    
+    translate([-25,50,49]) rotate([45,0,0]) cube([30,20,20]);    
 }
  
