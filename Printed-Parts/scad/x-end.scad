@@ -7,28 +7,44 @@
 
 use <bearing.scad>
 use <polyholes.scad>
+
+// center distance between the smooth rods.
 rod_distance = 45;
+
+// center distance between the lead screw and smooth rod.
+z_rod_distance = 17;
+
+// radial distance from lead screw center to nut hold center.
+lead_nut_holes = 9.5;
+
+
+// Adjustments for parameterized z rod separation. Original model was 17mm.
+zadjust = (z_rod_distance - 17);
 
 module x_end_base()
 {
     // Main block
     height = 58;
-    translate(v=[-15,-9,height/2]) cube(size = [17,39,height], center = true);
-    translate([-8,-28.5,0]) cube(size = [5,1,13.5]);
+    translate(v=[-15,-9-(zadjust/2),height/2]) cube(size = [17,39+zadjust,height], center = true);
+    translate([-8,-28.5-zadjust,0]) cube(size = [5,1,13.5]);
     
     // Bearing holder
     vertical_bearing_base();	
     
     //Nut trap
     // Cylinder
-    translate(v=[0,-17,0]) poly_cylinder(h = 13.5, r=12.5, $fn=25);
+    translate(v=[0,-z_rod_distance,0]) poly_cylinder(h = 13.5, r=12.5, $fn=25);
     difference()
     {
-        translate(v=[0,-17,13]) poly_cylinder(h = 3, r=12.5, $fn=25);
-        translate(v=[8,-17,12]) rotate([0,0,0]) cube(size = [15,50,10], center = true);
-        translate(v=[8,-24,12]) rotate([0,0,0]) cube(size = [50,15,10], center = true);
-        translate(v=[0,-17, -1]) cylinder(h = 20, r = 6.7, $fn = 60);
+        translate(v=[0,-z_rod_distance,13]) poly_cylinder(h = 3, r=13.5, $fn=25);
+        translate(v=[8,-z_rod_distance,12]) rotate([0,0,0]) cube(size = [15,50,10], center = true);
+        translate(v=[8,-z_rod_distance - 7,12]) rotate([0,0,0]) cube(size = [50,15,10], center = true);
+        translate(v=[0,-z_rod_distance, -1]) cylinder(h = 20, r = 5, $fn = 60);
     }
+    
+    // filler block between the holes
+    translate(v=[0,-z_rod_distance/2,6.75]) cube(size = [15.38,5+zadjust,13.5], center = true);
+    translate(v=[-3,-z_rod_distance/2,14]) cube(size = [7,3+zadjust,4], center = true);
     
     
     // Nut brace
@@ -54,52 +70,56 @@ module x_end_holes()
         translate(v=[-5.5-10+1.5,-10-1,30]) cube(size = [18,1,28], center = true);
         difference()
         {
+
+        // main body scales according to z rod separation.
+        length = 46+(zadjust*2);
+        center = -10-(zadjust);
         
-        translate(v=[-5.5-10+1.5,-10,30]) cube(size = [10,46,28], center = true);
+        translate(v=[-5.5-10+1.5,center,30]) cube(size = [10,length,28], center = true);
 
         // Nice edges
-        translate(v=[-5.5-10+1.5-5,-10,30+23]) rotate([0,20,0]) cube(size = [10,46,28], center = true);
-        translate(v=[-5.5-10+1.5+5,-10,30+23]) rotate([0,-20,0]) cube(size = [10,46,28], center = true);
-        translate(v=[-5.5-10+1.5,-10,30-23]) rotate([0,45,0]) cube(size = [10,46,28], center = true);
-        translate(v=[-5.5-10+1.5,-10,30-23]) rotate([0,-45,0]) cube(size = [10,46,28], center = true);
+        translate(v=[-5.5-10+1.5-5,center,30+23]) rotate([0,20,0]) cube(size = [10,length,28], center = true);
+        translate(v=[-5.5-10+1.5+5,center,30+23]) rotate([0,-20,0]) cube(size = [10,length,28], center = true);
+        translate(v=[-5.5-10+1.5,center,30-23]) rotate([0,45,0]) cube(size = [10,length,28], center = true);
+        translate(v=[-5.5-10+1.5,center,30-23]) rotate([0,-45,0]) cube(size = [10,length,28], center = true);
 
         }
     }
 
 
 // Bottom pushfit rod
-    translate(v=[-15,-41,6]) rotate(a=[-90,0,0]) pushfit_rod(7.8,50);
+    translate(v=[-15,-41-zadjust,6]) rotate(a=[-90,180,0]) pushfit_rod(7.8,50+zadjust);
 
 // Top pushfit rod
-    translate(v=[-15,-41.5,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(7.8,50);
+    translate(v=[-15,-41.5-zadjust,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(7.8,50+zadjust);
 
 // TR Nut trap
    // Hole for the nut
-    //#translate(v=[0,-17, -1]) poly_cylinder(h = 9.01, r = 6.7, $fn = 60);
-    translate(v=[0,-17, -1]) cylinder(h = 14.51, r = 6.7, $fn = 60);
-    translate(v=[0,-17, -0.1]) cylinder(h = 1, r1 = 7.2,r2 = 6.7, $fn = 60);
+    //#translate(v=[0,-z_rod_distance, -1]) poly_cylinder(h = 9.01, r = 6.7, $fn = 60);
+    translate(v=[0,-z_rod_distance, -1]) cylinder(h = 14.51, r = 5, $fn = 60);
+    translate(v=[0,-z_rod_distance, -0.1]) cylinder(h = 1, r1 = 5.5,r2 = 5, $fn = 60);
 
 // Screw holes for TR nut
-    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 9.5, -4]) cylinder(h = 19, r = 1.65, $fn=50);
-    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -9.5, -4]) cylinder(h = 19, r = 1.65, $fn=50);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, lead_nut_holes, -4]) cylinder(h = 19, r = 1.65, $fn=50);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, -lead_nut_holes, -4]) cylinder(h = 19, r = 1.65, $fn=50);
 
-    translate(v=[0,-17,0]) rotate([0,0,-135]) translate([0,9.5,-1]) cylinder(h=2, r1=2.2,r2=1.65, $fn=50);
-    translate(v=[0,-17,0]) rotate([0,0,-135]) translate([0,-9.5,-1]) cylinder(h=2, r1=2.2,r2=1.65,, $fn=50);
+    translate(v=[0,-z_rod_distance,0]) rotate([0,0,-135]) translate([0,lead_nut_holes,-1]) cylinder(h=2, r1=2.2,r2=1.65, $fn=50);
+    translate(v=[0,-z_rod_distance,0]) rotate([0,0,-135]) translate([0,-lead_nut_holes,-1]) cylinder(h=2, r1=2.2,r2=1.65,, $fn=50);
 
 
 // Nut traps for TR nut screws
-    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 9.5, 11]) rotate([0, 0, 0])cylinder(h = 6, r = 3.1, $fn=6);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, lead_nut_holes, 11]) rotate([0, 0, 0])cylinder(h = 6, r = 3.1, $fn=6);
 
-    translate(v=[0,-17, 0]) rotate([0,0,-135]) translate([0,-9.5,10]) rotate([0,0,30])cylinder(h = 3, r = 3.1, $fn=6);
-    translate([-5.5,-17.2,10]) rotate([0,0,30]) cube([5,5,3]);
-    translate([-0,-17.2,10]) rotate([0,0,60]) cube([5,10,3]);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-lead_nut_holes,10]) rotate([0,0,30])cylinder(h = 3, r = 3.1, $fn=6);
+    translate([-5.5,-z_rod_distance - 0.2,10]) rotate([0,0,30]) cube([5,5,3]);
+    translate([-0,-z_rod_distance - 0.2,10]) rotate([0,0,60]) cube([5,8,3]);
     
     translate([0,0,6.5])
     difference()
     {
-        translate(v=[0,-17, 0]) rotate([0,0,-135]) translate([0,-9.5,5.8]) rotate([0,0,30])cylinder(h = 1, r = 3.1, $fn=6);
-        translate([-11,-12.0,4.5]) rotate([0,0,45]) cube([8,3,3]);
-        translate([-6.5,-16.85,4.5]) rotate([0,0,45]) cube([8,3,3]);
+        translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-lead_nut_holes,5.8]) rotate([0,0,30])cylinder(h = 1, r = 3.1, $fn=6);
+        translate([-11,-z_rod_distance + 5,4.5]) rotate([0,0,45]) cube([8,3,3]);
+        translate([-6.5,-z_rod_distance + 0.15,4.5]) rotate([0,0,45]) cube([8,3,3]);
     }
 }
 
@@ -116,11 +136,11 @@ module x_end_plain()
             x_end_base();
             x_end_holes();
         }
-        translate(v=[-5.8,-13.3,13.5]) rotate([0,0,45.3]) cube(size = [10,2,1], center = true);
+        translate(v=[-5.8,3.7-z_rod_distance,13.5]) rotate([0,0,45.3]) cube(size = [10,2,1], center = true);
     }
     difference()
     {
-        translate(v=[0,-17, 0.3]) rotate([0,0,-135]) translate([0,-9.5,10]) rotate([0,0,30])cylinder(h = 3, r = 3.2, $fn=6);
+        translate(v=[0,-z_rod_distance, 0.3]) rotate([0,0,-135]) translate([0,-8,10]) rotate([0,0,30])cylinder(h = 2, r = 3.2, $fn=6);
         translate(v=[-5.8,-13.3,13.5]) rotate([0,0,45.3]) cube(size = [10,2,1], center = true);
     }
     }
