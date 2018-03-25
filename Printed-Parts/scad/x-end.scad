@@ -14,6 +14,9 @@ rod_distance = 45;
 // center distance between the lead screw and smooth rod.
 z_rod_distance = 17;
 
+// outer diameter of the lead nut.
+tr_diam = 10;
+
 // pitch circle diameter (PCD) for the lead nut.
 tr_pcd = 19;
 
@@ -39,7 +42,7 @@ module x_end_base()
         translate(v=[0,-z_rod_distance,13]) poly_cylinder(h = 3, r=13.5, $fn=25);
         translate(v=[8,-z_rod_distance,12]) rotate([0,0,0]) cube(size = [15,50,10], center = true);
         translate(v=[8,-z_rod_distance - 7,12]) rotate([0,0,0]) cube(size = [50,15,10], center = true);
-        translate(v=[0,-z_rod_distance, -1]) cylinder(h = 20, r = 5, $fn = 60);
+        translate(v=[0,-z_rod_distance, -1]) cylinder(h = 20, r = tr_diam/2, $fn = 60);
     }
     
     // filler block between the holes
@@ -96,8 +99,8 @@ module x_end_holes()
 // TR Nut trap
    // Hole for the nut
     //#translate(v=[0,-z_rod_distance, -1]) poly_cylinder(h = 9.01, r = 6.7, $fn = 60);
-    translate(v=[0,-z_rod_distance, -1]) cylinder(h = 14.51, r = 5, $fn = 60);
-    translate(v=[0,-z_rod_distance, -0.1]) cylinder(h = 1, r1 = 5.5,r2 = 5, $fn = 60);
+    translate(v=[0,-z_rod_distance, -1]) cylinder(h = 14.51, r = tr_diam/2, $fn = 60);
+    translate(v=[0,-z_rod_distance, -0.1]) cylinder(h = 1, r1 = tr_diam/2 + .5,r2 = tr_diam/2, $fn = 60);
 
 // Screw holes for TR nut
     translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, tr_pcd/2, -4]) cylinder(h = 19, r = 1.65, $fn=50);
