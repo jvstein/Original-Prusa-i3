@@ -14,8 +14,8 @@ rod_distance = 45;
 // center distance between the lead screw and smooth rod.
 z_rod_distance = 17;
 
-// radial distance from lead screw center to nut hold center.
-lead_nut_holes = 9.5;
+// pitch circle diameter (PCD) for the lead nut.
+tr_pcd = 19;
 
 
 // Adjustments for parameterized z rod separation. Original model was 17mm.
@@ -100,24 +100,24 @@ module x_end_holes()
     translate(v=[0,-z_rod_distance, -0.1]) cylinder(h = 1, r1 = 5.5,r2 = 5, $fn = 60);
 
 // Screw holes for TR nut
-    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, lead_nut_holes, -4]) cylinder(h = 19, r = 1.65, $fn=50);
-    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, -lead_nut_holes, -4]) cylinder(h = 19, r = 1.65, $fn=50);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, tr_pcd/2, -4]) cylinder(h = 19, r = 1.65, $fn=50);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, -tr_pcd/2, -4]) cylinder(h = 19, r = 1.65, $fn=50);
 
-    translate(v=[0,-z_rod_distance,0]) rotate([0,0,-135]) translate([0,lead_nut_holes,-1]) cylinder(h=2, r1=2.2,r2=1.65, $fn=50);
-    translate(v=[0,-z_rod_distance,0]) rotate([0,0,-135]) translate([0,-lead_nut_holes,-1]) cylinder(h=2, r1=2.2,r2=1.65,, $fn=50);
+    translate(v=[0,-z_rod_distance,0]) rotate([0,0,-135]) translate([0,tr_pcd/2,-1]) cylinder(h=2, r1=2.2,r2=1.65, $fn=50);
+    translate(v=[0,-z_rod_distance,0]) rotate([0,0,-135]) translate([0,-tr_pcd/2,-1]) cylinder(h=2, r1=2.2,r2=1.65,, $fn=50);
 
 
 // Nut traps for TR nut screws
-    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, lead_nut_holes, 11]) rotate([0, 0, 0])cylinder(h = 6, r = 3.1, $fn=6);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0, 0, -135]) translate([0, tr_pcd/2, 11]) rotate([0, 0, 0])cylinder(h = 6, r = 3.1, $fn=6);
 
-    translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-lead_nut_holes,10]) rotate([0,0,30])cylinder(h = 3, r = 3.1, $fn=6);
+    translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-tr_pcd/2,10]) rotate([0,0,30])cylinder(h = 3, r = 3.1, $fn=6);
     translate([-5.5,-z_rod_distance - 0.2,10]) rotate([0,0,30]) cube([5,5,3]);
     translate([-0,-z_rod_distance - 0.2,10]) rotate([0,0,60]) cube([5,8,3]);
     
     translate([0,0,6.5])
     difference()
     {
-        translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-lead_nut_holes,5.8]) rotate([0,0,30])cylinder(h = 1, r = 3.1, $fn=6);
+        translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-tr_pcd/2,5.8]) rotate([0,0,30])cylinder(h = 1, r = 3.1, $fn=6);
         translate([-11,-z_rod_distance + 5,4.5]) rotate([0,0,45]) cube([8,3,3]);
         translate([-6.5,-z_rod_distance + 0.15,4.5]) rotate([0,0,45]) cube([8,3,3]);
     }
