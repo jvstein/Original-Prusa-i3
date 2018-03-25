@@ -19,5 +19,9 @@ This repository contains SCAD files and STLs of the printed parts.
 
 # CHANGES IN THIS BRANCH
 [Compare to the MK3 branch](https://github.com/prusa3d/Original-Prusa-i3/compare/MK3...jvstein:reprap-samuel-x-ends).
- * Parameterize the x-ends to support different distances between the z-axis rods.
+ * Parameterize the x-ends to support:
+   - Different distances between the z-axis rods.
+   - Different lead nut sizes.
  * Adjust the x-end models for the RepRap Samuel.
+   - 30mm between z-axis rods.
+   - Lead nut with 10mm outer diameter and 16mm PCD.
