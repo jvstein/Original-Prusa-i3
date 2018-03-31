@@ -36,10 +36,10 @@ module x_end_base()
     
     //Nut trap
     // Cylinder
-    translate(v=[0,-z_rod_distance,0]) poly_cylinder(h = 13.5, r=12.5, $fn=25);
+    translate(v=[0,-z_rod_distance,0]) poly_cylinder(h = 13.5, r=13.5, $fn=25);
     difference()
     {
-        translate(v=[0,-z_rod_distance,13]) poly_cylinder(h = 3, r=13.5, $fn=25);
+        translate(v=[0,-z_rod_distance,13]) poly_cylinder(h = 3, r=12.5, $fn=25);
         translate(v=[8,-z_rod_distance,12]) rotate([0,0,0]) cube(size = [15,50,10], center = true);
         translate(v=[8,-z_rod_distance - 7,12]) rotate([0,0,0]) cube(size = [50,15,10], center = true);
         translate(v=[0,-z_rod_distance, -1]) cylinder(h = 20, r = tr_diam/2, $fn = 60);
@@ -115,7 +115,7 @@ module x_end_holes()
 
     translate(v=[0,-z_rod_distance, 0]) rotate([0,0,-135]) translate([0,-tr_pcd/2,10]) rotate([0,0,30])cylinder(h = 3, r = 3.1, $fn=6);
     translate([-5.5,-z_rod_distance - 0.2,10]) rotate([0,0,30]) cube([5,5,3]);
-    translate([-0,-z_rod_distance - 0.2,10]) rotate([0,0,60]) cube([5,8,3]);
+    translate([-0,-z_rod_distance - 0.2,10]) rotate([0,0,60]) cube([5,10,3]);
     
     translate([0,0,6.5])
     difference()
@@ -143,7 +143,7 @@ module x_end_plain()
     }
     difference()
     {
-        translate(v=[0,-z_rod_distance, 0.3]) rotate([0,0,-135]) translate([0,-8,10]) rotate([0,0,30])cylinder(h = 2, r = 3.2, $fn=6);
+        translate(v=[0,-z_rod_distance, 0.3]) rotate([0,0,-135]) translate([0,-9.5,10]) rotate([0,0,30])cylinder(h = 3, r = 3.2, $fn=6);
         translate(v=[-5.8,-13.3,13.5]) rotate([0,0,45.3]) cube(size = [10,2,1], center = true);
     }
     }
